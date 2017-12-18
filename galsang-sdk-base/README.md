@@ -7,6 +7,7 @@
 - dom4j
 - fastjson
 - guava
+- lombok
 
 ## 包含工具
 

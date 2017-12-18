@@ -58,6 +58,15 @@
             <version>${guava.version}</version>
         </dependency>
         <!-- guava end -->
+
+        <!-- lombok start -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- lombok end -->
+
     </dependencies>
 
     <build>
