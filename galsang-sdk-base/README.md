@@ -2,21 +2,22 @@
 
 禁止和任何具体`应用层框架`和`业务`进行耦合
 
-## 工具包
+## 包含模块
+- junit
+- dom4j
+- fastjson
+- guava
 
-### FileUtil 
+## 包含工具
 
-### XmlUtil
-
-### ValidateUtil
+- file
+    - FileUtil    
+- regex
+    - ValidateUtil
+- view
+    - ApiResult
+    - ResultStatus
+- xml
+    - XmlUtil
 
 ---
-
-## 依赖包
-
-```xml
-    <junit.version>4.12</junit.version>
-    <dom4j.version>1.6.1</dom4j.version>
-    <fastjson.version>1.1.41</fastjson.version>
-    <guava.version>23.0</guava.version>
-```
