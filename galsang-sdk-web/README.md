@@ -6,6 +6,7 @@
 - galsang-sdk-base
 - spring-boot-starter-web
 - spring-boot-starter-test
+- swagger2
 
 ## 包含工具
 
