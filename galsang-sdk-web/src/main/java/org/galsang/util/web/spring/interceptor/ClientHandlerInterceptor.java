@@ -38,10 +38,14 @@ public class ClientHandlerInterceptor implements HandlerInterceptor {
         Long handlingTime = new Long(endTime - startTime);
         String ip = IpKit.getIpAddr(request);
 
-
         StringBuilder uriLogInfo = new StringBuilder();
-        uriLogInfo.append(" === 请求路径： ").append(ip).append(":").append(request.getLocalPort()).append(request.getRequestURI()).append(" "
-                + "== ").append(request.getMethod());
+        uriLogInfo.append(" === 请求路径： ")
+                .append(ip)
+                .append(":")
+                .append(request.getLocalPort())
+                .append(request.getRequestURI())
+                .append(" == ")
+                .append(request.getMethod());
 
         log.info(" ================== 开始 ======================= ");
         log.info(uriLogInfo.toString());
@@ -52,7 +56,10 @@ public class ClientHandlerInterceptor implements HandlerInterceptor {
         }
         params.forEach((k, v) -> {
             StringBuilder paramLogInfo = new StringBuilder();
-            paramLogInfo.append(" === 参数: ").append(k).append(" ==== ").append(Arrays.toString(v));
+            paramLogInfo.append(" === 参数: ")
+                    .append(k)
+                    .append(" ==== ")
+                    .append(Arrays.toString(v));
             log.info(paramLogInfo.toString());
         });
 
