@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Document>
+	<Head>
+		<RspType>N</RspType>
+		<RspDate>20171028</RspDate>
+		<RspTime>160019</RspTime>
+	</Head>
+	<Body>
+		<OrderList>
+			<Order>
+				<id>160019</id>
+			</Order>
+			<Order>
+				<id>null</id>
+			</Order>
+			<Order>
+				<id> null </id>
+			</Order>
+			<A>
+				<id>A - id</id>
+			</A>
+		</OrderList>
+	</Body>
+</Document>
