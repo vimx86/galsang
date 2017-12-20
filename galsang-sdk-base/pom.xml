@@ -19,8 +19,9 @@
 
         <junit.version>4.12</junit.version>
         <dom4j.version>1.6.1</dom4j.version>
-        <fastjson.version>1.1.41</fastjson.version>
+        <fastjson.version>1.2.38</fastjson.version>
         <guava.version>23.0</guava.version>
+        <lombok.version>1.16.18</lombok.version>
 
     </properties>
 
@@ -63,7 +64,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>${lombok.version}</version>
         </dependency>
         <!-- lombok end -->
 
