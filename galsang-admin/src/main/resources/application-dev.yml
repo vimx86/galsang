@@ -1,0 +1,58 @@
+spring:
+  profiles: dev
+  datasource:
+    druid:
+      web-stat-filter:
+        enabled: true
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        url-pattern: "/*"
+      stat-view-servlet:
+        login-username: galsang-admin
+        login-password: daydayup
+      username: galsang-admin
+      password: 123456
+      url: jdbc:mysql://127.0.0.1:3306/galsang-admin?characterEncoding=UTF-8&useSSL=false
+      db-type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      filter:
+        stat:
+          enabled: true
+          db-type: mysql
+          log-slow-sql: true
+          slow-sql-millis: 2000
+        wall:
+          enabled: true
+          db-type: mysql
+#          config:
+#            delete-allow: false
+#            drop-table-allow: false
+#        log4j2:
+#          enabled: true
+
+server:
+  port: 8888
+  context-path: /
+
+thymeleaf:
+  cache: false
+  prefix: classpath:/templates/
+  suffix: .html
+  encoding: UTF-8
+  content-type: text/html
+  mode: HTML
+
+#MyBatis 配置
+mybatis:
+  type-aliases-package: org.galsang.admin.base.model
+  mapper-locations: classpath:sqlMapper/**/*Mapper.xml
+  config-location: classpath:config/mybatis-config.xml
+
+#MyBatis 分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+logging:
+  level: info  # info debug warn
