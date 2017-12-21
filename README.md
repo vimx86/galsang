@@ -23,6 +23,7 @@ Java Labs.
     - Thymeleaf 1.4.0
     - MySQL 5.7
     - Swagger 2.6.1
+    - Shiro 1.4.0
     
 ## 工具
 
