@@ -10,10 +10,47 @@ Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-12-21 10:43:18
+Date: 2017-12-21 11:32:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `auth_assign`
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_assign`;
+CREATE TABLE `auth_assign` (
+  `id` varchar(36) NOT NULL COMMENT '授权id',
+  `userId` varchar(36) NOT NULL COMMENT '用户id',
+  `roleId` varchar(36) NOT NULL COMMENT '角色id',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '删除： 0 - 否；1 - 是',
+  `createdTime` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of auth_assign
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `auth_authority`
+-- ----------------------------
+DROP TABLE IF EXISTS `auth_authority`;
+CREATE TABLE `auth_authority` (
+  `id` varchar(36) NOT NULL COMMENT '角色授权id',
+  `roleId` varchar(36) NOT NULL COMMENT '角色id',
+  `menuId` varchar(36) NOT NULL COMMENT '功能id',
+  `deleted` tinyint(4) DEFAULT '0' COMMENT '删除： 0 - 否；1 - 是',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `createdTime` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of auth_authority
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `auth_dept`
@@ -26,6 +63,7 @@ CREATE TABLE `auth_dept` (
   `parentId` varchar(36) DEFAULT NULL COMMENT '上级部门',
   `OrgType` varchar(255) DEFAULT NULL COMMENT '机构类型',
   `levelCode` varchar(36) DEFAULT NULL COMMENT '层级编码',
+  `orderNum` int(11) DEFAULT NULL COMMENT '排序',
   `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '删除：0 - 否；1 - 是',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `createdTime` timestamp NULL DEFAULT NULL COMMENT '创建时间',
@@ -38,18 +76,19 @@ CREATE TABLE `auth_dept` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `auth_function`
+-- Table structure for `auth_menu`
 -- ----------------------------
-DROP TABLE IF EXISTS `auth_function`;
-CREATE TABLE `auth_function` (
+DROP TABLE IF EXISTS `auth_menu`;
+CREATE TABLE `auth_menu` (
   `id` varchar(36) NOT NULL COMMENT '功能id',
   `code` varchar(36) DEFAULT NULL COMMENT '功能编码',
-  `url` varchar(255) DEFAULT NULL COMMENT '功能路径',
   `name` varchar(50) DEFAULT NULL COMMENT '功能名称',
   `type` varchar(50) DEFAULT NULL COMMENT '功能类型：catalog -目录；menu - 菜单； button - 按钮',
+  `url` varchar(255) DEFAULT NULL COMMENT '功能路径',
   `icon` varchar(50) DEFAULT NULL COMMENT '图标样式',
   `levelCode` varchar(36) DEFAULT NULL COMMENT '层级编码',
   `parentId` varchar(36) DEFAULT NULL COMMENT '上级功能id',
+  `orderNum` int(11) DEFAULT NULL COMMENT '排序',
   `deleted` tinyint(4) DEFAULT '0' COMMENT '删除： 0 - 否； 1 - 是',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `createdTime` timestamp NULL DEFAULT NULL COMMENT '创建时间',
@@ -58,7 +97,7 @@ CREATE TABLE `auth_function` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Records of auth_function
+-- Records of auth_menu
 -- ----------------------------
 
 -- ----------------------------
@@ -69,8 +108,9 @@ CREATE TABLE `auth_role` (
   `id` varchar(36) CHARACTER SET utf8mb4 NOT NULL COMMENT '角色id',
   `code` varchar(50) CHARACTER SET utf8mb4 NOT NULL COMMENT '角色代码',
   `name` varchar(50) CHARACTER SET utf8mb4 NOT NULL COMMENT '角色名称',
-  `remark` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '备注',
+  `orderNum` int(11) DEFAULT NULL COMMENT '排序',
   `deleted` tinyint(4) DEFAULT '0' COMMENT '删除： 0 - 否；1 - 是',
+  `remark` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '备注',
   `createdTime` timestamp NULL DEFAULT NULL COMMENT '创建时间',
   `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -78,25 +118,6 @@ CREATE TABLE `auth_role` (
 
 -- ----------------------------
 -- Records of auth_role
--- ----------------------------
-
--- ----------------------------
--- Table structure for `auth_role_function`
--- ----------------------------
-DROP TABLE IF EXISTS `auth_role_function`;
-CREATE TABLE `auth_role_function` (
-  `id` varchar(36) NOT NULL COMMENT '角色授权id',
-  `roleId` varchar(36) NOT NULL COMMENT '角色id',
-  `functionId` varchar(36) NOT NULL COMMENT '功能id',
-  `deleted` tinyint(4) DEFAULT '0' COMMENT '删除： 0 - 否；1 - 是',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `createdTime` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Records of auth_role_function
 -- ----------------------------
 
 -- ----------------------------
@@ -119,22 +140,4 @@ CREATE TABLE `auth_user` (
 
 -- ----------------------------
 -- Records of auth_user
--- ----------------------------
-
--- ----------------------------
--- Table structure for `auth_user_role`
--- ----------------------------
-DROP TABLE IF EXISTS `auth_user_role`;
-CREATE TABLE `auth_user_role` (
-  `id` varchar(36) NOT NULL COMMENT '授权id',
-  `userId` varchar(36) NOT NULL COMMENT '用户id',
-  `roleId` varchar(36) NOT NULL COMMENT '角色id',
-  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT '删除： 0 - 否；1 - 是',
-  `createdTime` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-  `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Records of auth_user_role
 -- ----------------------------
