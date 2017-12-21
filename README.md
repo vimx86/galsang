@@ -19,7 +19,12 @@ Java Labs.
     - bootstrap-validator
 - 后端 
     - Spring Boot 1.5.9
-    - MyBatis 
-    - Thymeleaf 
+    - MyBatis 3.4.5
+    - Thymeleaf 1.4.0
     - MySQL 5.7
+    - Swagger 2.6.1
     
+## 工具
+
+- [IDEA](https://www.jetbrains.com/idea/)
+- [MybatisX](https://gitee.com/baomidou/mybatis-plus)
